@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth" x-data="{ dark:false, mobileMenu:false, lightbox:false, lightboxSrc:'', priceYearly:true }" :class="dark ? 'dark' : ''">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wells Digital — Dropshipping Portfolio</title>
+  <meta name="description" content="Websites that convert & impress. Portfolio and packages for high-performing dropshipping stores — built fast, beautiful, and ready to scale.">
+  <meta property="og:title" content="Websites That Convert & Impress">
+  <meta property="og:description" content="From clean starter sites to full-scale masterpieces for dropshipping brands.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1520975922284-9d60f34f47d1?q=80&w=1600&auto=format&fit=crop">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef9ff',
+              100: '#d6f0ff',
+              200: '#aee1ff',
+              300: '#7ed1ff',
+              400: '#4dc2ff',
+              500: '#1bb2ff',
+              600: '#0b90d6',
+              700: '#096fa6',
+              800: '#084f75',
+              900: '#05344d'
+            }
+          },
+          boxShadow: {
+            glow: '0 0 0 3px rgba(27,178,255,0.35), 0 10px 30px rgba(0,0,0,0.25)'
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Alpine.js -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <!-- AOS Scroll Animations -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <!-- Swiper for carousels -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <style>
+    .glass { backdrop-filter: blur(10px); background: rgba(255,255,255,0.08); }
+    .dark .glass { background: rgba(0,0,0,0.35); }
+    .gradient-text { background: linear-gradient(90deg,#fff 0%, #aee1ff 35%, #4dc2ff 60%, #fff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .dark .gradient-text { background: linear-gradient(90deg,#fff 0%, #7ed1ff 35%, #1bb2ff 60%, #fff 100%); }
+    .hero-overlay { background: linear-gradient(to bottom, rgba(0,0,0,0.65), rgba(0,0,0,0.25) 30%, rgba(0,0,0,0.55)); }
+    @media (prefers-reduced-motion: reduce) {
+      .aos-init, .aos-animate { transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+<body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100 antialiased selection:bg-brand-200 selection:text-slate-900">
+  <!-- Header -->
+  <header class="fixed top-0 inset-x-0 z-50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mt-4 rounded-2xl glass shadow-glow">
+        <div class="flex items-center justify-between px-4 py-3">
+          <a href="#" class="flex items-center gap-2 font-semibold tracking-tight">
+            <span class="text-2xl">⚡</span><span>Wells Digital</span>
+          </a>
+          <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+            <a href="#portfolio" class="hover:text-brand-400">Work</a>
+            <a href="#packages" class="hover:text-brand-400">Packages</a>
+            <a href="#features" class="hover:text-brand-400">Features</a>
+            <a href="#faq" class="hover:text-brand-400">FAQ</a>
+            <a href="#contact" class="hover:text-brand-400">Contact</a>
+            <button @click="dark=!dark" class="ml-2 rounded-xl px-3 py-2 bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900 hover:shadow-glow transition">
+              <span x-show="!dark">Dark</span><span x-show="dark">Light</span>
+            </button>
+          </nav>
+          <button @click="mobileMenu=!mobileMenu" class="md:hidden rounded-xl px-3 py-2 bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900">Menu</button>
+        </div>
+        <div x-show="mobileMenu" x-transition class="md:hidden px-4 pb-4">
+          <div class="grid gap-2 text-sm">
+            <a @click="mobileMenu=false" href="#portfolio" class="rounded-lg px-3 py-2 hover:bg-white/10">Work</a>
+            <a @click="mobileMenu=false" href="#packages" class="rounded-lg px-3 py-2 hover:bg-white/10">Packages</a>
+            <a @click="mobileMenu=false" href="#features" class="rounded-lg px-3 py-2 hover:bg-white/10">Features</a>
+            <a @click="mobileMenu=false" href="#faq" class="rounded-lg px-3 py-2 hover:bg-white/10">FAQ</a>
+            <a @click="mobileMenu=false" href="#contact" class="rounded-lg px-3 py-2 hover:bg-white/10">Contact</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero / Landing -->
+  <section id="hero" class="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+    <video class="absolute inset-0 w-full h-full object-cover" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1520975922284-9d60f34f47d1?q=80&w=1600&auto=format&fit=crop">
+      <source src="https://cdn.coverr.co/videos/coverr-coding-on-laptop-4274/1080p.mp4" type="video/mp4">
+    </video>
+    <div class="absolute inset-0 hero-overlay"></div>
+    <div class="relative z-10 mx-auto max-w-6xl px-4 text-center">
+      <p class="inline-flex items-center gap-2 rounded-full bg-white/10 dark:bg-black/30 px-4 py-2 text-xs uppercase tracking-widest text-white/90">Dropshipping Specialists · Fast · SEO-ready</p>
+      <h1 class="mt-6 text-4xl sm:text-6xl md:text-7xl font-extrabold leading-tight text-white">
+        <span class="gradient-text">Websites That Convert & Impress</span>
+      </h1>
+      <p class="mt-4 text-lg sm:text-xl text-white/90 max-w-3xl mx-auto">From clean starter sites to full-scale masterpieces. We craft lightning-fast, story-driven storefronts that turn browsers into buyers.</p>
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+        <a href="#packages" class="rounded-2xl bg-brand-500 hover:bg-brand-400 text-white px-6 py-3 shadow-glow">View My Packages</a>
+        <a href="#portfolio" class="rounded-2xl bg-white/15 hover:bg-white/25 text-white px-6 py-3 backdrop-blur">See My Work</a>
+      </div>
+      <!-- Hero metrics -->
+      <div class="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-6 text-white/90" id="features">
+        <div class="glass rounded-2xl p-6" data-aos="fade-up">
+          <div class="text-3xl font-bold">98%</div>
+          <div class="text-sm">Client satisfaction</div>
+        </div>
+        <div class="glass rounded-2xl p-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="text-3xl font-bold">1.2s</div>
+          <div class="text-sm">Avg. first paint</div>
+        </div>
+        <div class="glass rounded-2xl p-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="text-3xl font-bold">+37%</div>
+          <div class="text-sm">Conv. uplift</div>
+        </div>
+        <div class="glass rounded-2xl p-6" data-aos="fade-up" data-aos-delay="300">
+          <div class="text-3xl font-bold">SEO</div>
+          <div class="text-sm">Clean structure</div>
+        </div>
+      </div>
+    </div>
+    <!-- Sticky CTA -->
+    <a href="#contact" class="fixed bottom-6 right-6 rounded-full px-5 py-3 bg-brand-500 text-white shadow-glow hover:bg-brand-400">Get a Quote</a>
+  </section>
+
+  <!-- Showcase Strip (Carousel) -->
+  <section class="py-20 bg-gradient-to-b from-white to-brand-50 dark:from-slate-950 dark:to-slate-900" aria-labelledby="showcase">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between gap-4 mb-8">
+        <h2 id="showcase" class="text-2xl sm:text-3xl font-bold">Recent Work</h2>
+        <div class="text-sm text-slate-600 dark:text-slate-300">Swipe →</div>
+      </div>
+      <div class="swiper" id="swiper-showcase" data-aos="fade-up">
+        <div class="swiper-wrapper">
+          <!-- Slides -->
+          <div class="swiper-slide">
+            <a href="#portfolio" class="block group">
+              <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1600&auto=format&fit=crop" alt="E-commerce Mockup" class="rounded-2xl aspect-[16/9] object-cover">
+              <div class="mt-3 text-sm opacity-80 group-hover:opacity-100">E‑commerce</div>
+            </a>
+          </div>
+          <div class="swiper-slide">
+            <a href="#portfolio" class="block group">
+              <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600&auto=format&fit=crop" alt="Landing Page Mockup" class="rounded-2xl aspect-[16/9] object-cover">
+              <div class="mt-3 text-sm opacity-80 group-hover:opacity-100">Landing Page</div>
+            </a>
+          </div>
+          <div class="swiper-slide">
+            <a href="#portfolio" class="block group">
+              <img src="https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?q=80&w=1600&auto=format&fit=crop" alt="Portfolio Mockup" class="rounded-2xl aspect-[16/9] object-cover">
+              <div class="mt-3 text-sm opacity-80 group-hover:opacity-100">Portfolio</div>
+            </a>
+          </div>
+          <div class="swiper-slide">
+            <a href="#portfolio" class="block group">
+              <img src="https://images.unsplash.com/photo-1529101091764-c3526daf38fe?q=80&w=1600&auto=format&fit=crop" alt="Brand Story Mockup" class="rounded-2xl aspect-[16/9] object-cover">
+              <div class="mt-3 text-sm opacity-80 group-hover:opacity-100">Brand Story</div>
+            </a>
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Grid with Lightbox -->
+  <section id="portfolio" class="py-20 bg-white dark:bg-slate-950">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold mb-2">Portfolio</h2>
+      <p class="text-slate-600 dark:text-slate-300 mb-8">A selection of storefronts and landing pages optimised for high conversion. Click any image to preview.</p>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" id="portfolio-grid"></div>
+    </div>
+
+    <!-- Lightbox modal -->
+    <div x-show="lightbox" x-transition.opacity class="fixed inset-0 z-[100] bg-black/70 flex items-center justify-center p-4">
+      <div class="relative max-w-5xl w-full">
+        <button @click="lightbox=false" class="absolute -top-3 -right-3 bg-white text-slate-900 rounded-full px-3 py-1 shadow">✕</button>
+        <img :src="lightboxSrc" alt="Preview" class="rounded-2xl w-full h-auto object-contain">
+      </div>
+    </div>
+  </section>
+
+  <!-- Packages -->
+  <section id="packages" class="py-24 bg-gradient-to-b from-brand-50 to-white dark:from-slate-900 dark:to-slate-950">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex items-end justify-between gap-4 mb-10">
+        <div>
+          <h2 class="text-3xl font-bold">Packages</h2>
+          <p class="text-slate-600 dark:text-slate-300">Pick the perfect launchpad. Scale whenever you’re ready.</p>
+        </div>
+        <div class="flex items-center gap-3 text-sm" x-data="{ priceYearly:true }">
+          <span :class="!priceYearly ? 'font-semibold' : 'opacity-70'">Monthly</span>
+          <label class="inline-flex items-center cursor-pointer">
+            <input type="checkbox" class="hidden" @change="priceYearly=!priceYearly">
+            <span class="w-12 h-6 bg-slate-300 dark:bg-slate-700 rounded-full relative transition">
+              <span class="absolute top-0.5 left-0.5 w-5 h-5 bg-white dark:bg-slate-100 rounded-full transition" :style="priceYearly ? 'transform: translateX(24px);' : ''"></span>
+            </span>
+          </label>
+          <span :class="priceYearly ? 'font-semibold' : 'opacity-70'">Yearly <span class="text-brand-500">(save 15%)</span></span>
+        </div>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-3">
+        <!-- Pixel -->
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-800 p-6 bg-white/60 dark:bg-slate-900/60 backdrop-blur" data-aos="zoom-in">
+          <h3 class="text-xl font-bold">Pixel</h3>
+          <p class="text-slate-600 dark:text-slate-300">Clean starter site</p>
+          <div class="my-4 text-3xl font-extrabold">
+            <span class="price-yearly">Starting £499</span>
+            <span class="price-monthly hidden">From £49/mo</span>
+          </div>
+          <ul class="space-y-2 text-sm">
+            <li>✅ 1–3 pages, modern hero</li>
+            <li>✅ Responsive, fast</li>
+            <li>✅ Starter SEO + analytics</li>
+            <li>✅ Basic product setup</li>
+          </ul>
+          <a href="#contact" class="mt-6 inline-block rounded-xl bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900 px-5 py-3">Get Started</a>
+        </div>
+
+        <!-- Canvas (Most Popular) -->
+        <div class="relative rounded-2xl border-2 border-brand-400 p-6 bg-white shadow-glow dark:bg-slate-900" data-aos="zoom-in" data-aos-delay="100">
+          <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-500 text-white text-xs px-3 py-1 rounded-full shadow">Most Popular</span>
+          <h3 class="text-xl font-bold">Canvas</h3>
+          <p class="text-slate-600 dark:text-slate-300">Growth-ready storefront</p>
+          <div class="my-4 text-3xl font-extrabold">
+            <span class="price-yearly">Starting £1,199</span>
+            <span class="price-monthly hidden">From £99/mo</span>
+          </div>
+          <ul class="space-y-2 text-sm">
+            <li>✅ 5–8 pages, sections library</li>
+            <li>✅ Conversion optimised</li>
+            <li>✅ A/B ready, email capture</li>
+            <li>✅ 10–20 products, collections</li>
+          </ul>
+          <a href="#contact" class="mt-6 inline-block rounded-xl bg-brand-500 hover:bg-brand-400 text-white px-5 py-3">Get Started</a>
+        </div>
+
+        <!-- Masterpiece -->
+        <div class="rounded-2xl border border-slate-200 dark:border-slate-800 p-6 bg-white/60 dark:bg-slate-900/60 backdrop-blur" data-aos="zoom-in" data-aos-delay="200">
+          <h3 class="text-xl font-bold">Masterpiece</h3>
+          <p class="text-slate-600 dark:text-slate-300">Full-scale custom build</p>
+          <div class="my-4 text-3xl font-extrabold">
+            <span class="price-yearly">Starting £2,499</span>
+            <span class="price-monthly hidden">From £219/mo</span>
+          </div>
+          <ul class="space-y-2 text-sm">
+            <li>✅ 10+ pages, rich sections</li>
+            <li>✅ Headless-ready architecture</li>
+            <li>✅ CRO suite + heatmaps</li>
+            <li>✅ 50+ products, bundles</li>
+          </ul>
+          <a href="#contact" class="mt-6 inline-block rounded-xl bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900 px-5 py-3">Get Started</a>
+        </div>
+      </div>
+
+      <!-- Comparison Table -->
+      <div class="mt-12 overflow-x-auto">
+        <table class="min-w-full text-sm border-separate border-spacing-y-2">
+          <thead class="text-left">
+            <tr>
+              <th class="px-4 py-3">Feature</th>
+              <th class="px-4 py-3">Pixel</th>
+              <th class="px-4 py-3">Canvas</th>
+              <th class="px-4 py-3">Masterpiece</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bg-white/60 dark:bg-slate-900/60">
+              <td class="px-4 py-3">Pages</td><td class="px-4 py-3">1–3</td><td class="px-4 py-3">5–8</td><td class="px-4 py-3">10+</td>
+            </tr>
+            <tr class="bg-white/60 dark:bg-slate-900/60">
+              <td class="px-4 py-3">Products</td><td class="px-4 py-3">Up to 10</td><td class="px-4 py-3">Up to 20</td><td class="px-4 py-3">50+</td>
+            </tr>
+            <tr class="bg-white/60 dark:bg-slate-900/60">
+              <td class="px-4 py-3">SEO & Analytics</td><td class="px-4 py-3">Starter</td><td class="px-4 py-3">Advanced</td><td class="px-4 py-3">Pro Suite</td>
+            </tr>
+            <tr class="bg-white/60 dark:bg-slate-900/60">
+              <td class="px-4 py-3">Email / CRM</td><td class="px-4 py-3">Optional</td><td class="px-4 py-3">Included</td><td class="px-4 py-3">Automations</td>
+            </tr>
+            <tr class="bg-white/60 dark:bg-slate-900/60">
+              <td class="px-4 py-3">Support</td><td class="px-4 py-3">14 days</td><td class="px-4 py-3">30 days</td><td class="px-4 py-3">90 days</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature Highlights -->
+  <section class="py-24 bg-white dark:bg-slate-950">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="rounded-2xl p-6 border border-slate-200 dark:border-slate-800" data-aos="fade-up">
+          <h3 class="text-lg font-semibold">Lightning Performance</h3>
+          <p class="text-slate-600 dark:text-slate-300 mt-2">Lazy loading, optimized images, clean code. Built to score green across Core Web Vitals.</p>
+        </div>
+        <div class="rounded-2xl p-6 border border-slate-200 dark:border-slate-800" data-aos="fade-up" data-aos-delay="100">
+          <h3 class="text-lg font-semibold">Conversion Obsessed</h3>
+          <p class="text-slate-600 dark:text-slate-300 mt-2">Clear CTAs, social proof, and battle‑tested funnels adapted for dropshipping.</p>
+        </div>
+        <div class="rounded-2xl p-6 border border-slate-200 dark:border-slate-800" data-aos="fade-up" data-aos-delay="200">
+          <h3 class="text-lg font-semibold">Future‑proof</h3>
+          <p class="text-slate-600 dark:text-slate-300 mt-2">SEO-ready structure, analytics baked in, and easy scaling to headless architecture.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="py-20 bg-gradient-to-b from-brand-50 to-white dark:from-slate-900 dark:to-slate-950">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold mb-8">What Clients Say</h2>
+      <div class="swiper" id="swiper-testimonials">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="rounded-2xl p-6 glass text-white">
+              <p class="text-lg">“Went from zero to sales in a week. The site looks insane.”</p>
+              <div class="mt-4 text-sm opacity-80">— Mia, Beauty Brand</div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="rounded-2xl p-6 glass text-white">
+              <p class="text-lg">“Fast, clean, and it converts. Exactly what we needed.”</p>
+              <div class="mt-4 text-sm opacity-80">— Alex, Fitness Store</div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="rounded-2xl p-6 glass text-white">
+              <p class="text-lg">“Our AOV jumped 29% after launch. Ridiculous.”</p>
+              <div class="mt-4 text-sm opacity-80">— Priya, Home Goods</div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-24 bg-white dark:bg-slate-950">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold mb-8">FAQ</h2>
+      <div class="space-y-4">
+        <div class="rounded-xl border border-slate-200 dark:border-slate-800 p-4" x-data="{open:false}">
+          <button @click="open=!open" class="w-full text-left font-semibold">How fast can you launch?</button>
+          <div x-show="open" class="mt-2 text-slate-600 dark:text-slate-300">Starter sites in 7–10 days. Full builds 3–5 weeks depending on scope.</div>
+        </div>
+        <div class="rounded-xl border border-slate-200 dark:border-slate-800 p-4" x-data="{open:false}">
+          <button @click="open=!open" class="w-full text-left font-semibold">Do you provide product setup?</button>
+          <div x-show="open" class="mt-2 text-slate-600 dark:text-slate-300">Yes — collections, variants, and essential apps. We can also import CSVs.</div>
+        </div>
+        <div class="rounded-xl border border-slate-200 dark:border-slate-800 p-4" x-data="{open:false}">
+          <button @click="open=!open" class="w-full text-left font-semibold">What platforms?</button>
+          <div x-show="open" class="mt-2 text-slate-600 dark:text-slate-300">Shopify and high‑performance static/Jamstack sites with storefront APIs.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-24 bg-gradient-to-b from-brand-50 to-white dark:from-slate-900 dark:to-slate-950">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 gap-8 items-center">
+        <div>
+          <h2 class="text-3xl font-bold">Let’s Build Your Store</h2>
+          <p class="text-slate-600 dark:text-slate-300 mt-2">Tell me about your brand and goals — I’ll reply with a tailored plan within 24 hours.</p>
+          <ul class="mt-6 space-y-2 text-sm">
+            <li>✅ Discovery call</li>
+            <li>✅ Clear timeline & deliverables</li>
+            <li>✅ Transparent pricing</li>
+          </ul>
+        </div>
+        <form action="https://formspree.io/f/your-id" method="POST" class="rounded-2xl p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+          <div class="grid gap-4">
+            <input name="name" required placeholder="Your name" class="rounded-xl px-4 py-3 bg-slate-100 dark:bg-slate-800 outline-none">
+            <input type="email" name="email" required placeholder="Email" class="rounded-xl px-4 py-3 bg-slate-100 dark:bg-slate-800 outline-none">
+            <input name="brand" placeholder="Brand / Store name" class="rounded-xl px-4 py-3 bg-slate-100 dark:bg-slate-800 outline-none">
+            <textarea name="message" rows="4" placeholder="What are you trying to achieve?" class="rounded-xl px-4 py-3 bg-slate-100 dark:bg-slate-800 outline-none"></textarea>
+            <button class="rounded-xl bg-slate-900 text-white dark:bg-brand-500 dark:text-white px-5 py-3 hover:shadow-glow">Send Message</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-10 border-t border-slate-200 dark:border-slate-800">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-sm opacity-70">© <span id="year"></span> Wells Digital — All rights reserved.</p>
+      <div class="flex items-center gap-4 text-sm opacity-80">
+        <a href="#packages">Packages</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+    // AOS init
+    AOS.init({ once: true, duration: 700, easing: 'ease-out-cubic' });
+
+    // Swiper init (showcase)
+    new Swiper('#swiper-showcase', {
+      loop: true,
+      slidesPerView: 1,
+      spaceBetween: 16,
+      autoplay: { delay: 2500, disableOnInteraction: false },
+      pagination: { el: '#swiper-showcase .swiper-pagination', clickable: true },
+      navigation: { nextEl: '#swiper-showcase .swiper-button-next', prevEl: '#swiper-showcase .swiper-button-prev' },
+      breakpoints: { 640:{slidesPerView:2}, 1024:{slidesPerView:3} }
+    });
+
+    // Swiper init (testimonials)
+    new Swiper('#swiper-testimonials', {
+      loop: true,
+      slidesPerView: 1,
+      autoplay: { delay: 4000, disableOnInteraction: false },
+      pagination: { el: '#swiper-testimonials .swiper-pagination', clickable: true }
+    });
+
+    // Build portfolio cards dynamically after DOM loads
+    document.addEventListener('DOMContentLoaded', () => {
+      const images = [
+        {src:'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600&auto=format&fit=crop', label:'Tech Landing'},
+        {src:'https://images.unsplash.com/photo-1520975922284-9d60f34f47d1?q=80&w=1600&auto=format&fit=crop', label:'E‑commerce Store'},
+        {src:'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1600&auto=format&fit=crop', label:'Beauty Brand'},
+        {src:'https://images.unsplash.com/photo-1529101091764-c3526daf38fe?q=80&w=1600&auto=format&fit=crop', label:'Home Goods'},
+        {src:'https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?q=80&w=1600&auto=format&fit=crop', label:'Lifestyle'},
+        {src:'https://images.unsplash.com/photo-1520975922284-9d60f34f47d1?q=80&w=1600&auto=format&fit=crop', label:'Brand Story'}
+      ];
+      const grid = document.getElementById('portfolio-grid');
+      grid.innerHTML = images.map(i => `
+        <figure class="group relative cursor-pointer" @click="lightbox=true; lightboxSrc='${i.src}'">
+          <img src="${i.src}" alt="${i.label}" loading="lazy" class="w-full h-64 object-cover rounded-2xl">
+          <figcaption class="absolute inset-0 rounded-2xl bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4 text-white">
+            ${i.label}
+          </figcaption>
+        </figure>
+      `).join('');
+    });
+  </script>
+</body>
+</html>
